@@ -1,4 +1,8 @@
 # Databricks notebook source
+# MAGIC %run "../includes/configuration"
+
+# COMMAND ----------
+
 # MAGIC %md
 # MAGIC ###Ingest circuits.csv file
 # MAGIC
@@ -12,7 +16,7 @@
 
 circuits_df = spark.read \
     .option("header",True) \
-    .csv("/mnt/formula1dl/raw/circuits.csv")
+    .csv(f"{raw_folder_path}/circuits.csv")
 
 # COMMAND ----------
 
@@ -23,7 +27,7 @@ display(circuits_df.printSchema)
 circuits_df = (spark.read
                .option("header", True)
                .option("inferSchema",True)
-               .csv("/mnt/formula1dl/raw/circuits.csv")
+               .csv(f"{raw_folder_path}/circuits.csv")
 )
 print(circuits_df.printSchema)
 
@@ -55,7 +59,7 @@ circuits_schema = StructType(fields = [StructField("circuitId", IntegerType(), F
 circuits_df = (spark.read
                .option("header", True)
                .schema(circuits_schema)
-               .csv("/mnt/formula1dl/raw/circuits.csv")
+               .csv(f"{raw_folder_path}/circuits.csv")
             )
 print(circuits_df.printSchema)
 
@@ -157,7 +161,7 @@ display(circuits_df.limit(5))
 
 # COMMAND ----------
 
-circuits_df.write.mode("overwrite").parquet("/mnt/formula1dl/processed/circuits")
+circuits_df.write.mode("overwrite").parquet(f"{processed_folder_path}/circuits")
 
 # COMMAND ----------
 
@@ -165,7 +169,8 @@ circuits_df.write.mode("overwrite").parquet("/mnt/formula1dl/processed/circuits"
 
 # COMMAND ----------
 
-display(spark.read.parquet("/mnt/formula1dl/processed/circuits"))
+display(spark.read.parquet(f"{processed_folder_path}/circuits"))
 
 # COMMAND ----------
+
 
