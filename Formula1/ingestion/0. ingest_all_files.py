@@ -55,4 +55,20 @@ v_result
 
 # COMMAND ----------
 
+v_result = dbutils.notebook.run("7. import_lap_time_folder", 0, {"p_data_source": "Ergast API"})
+
+# COMMAND ----------
+
+v_result
+
+# COMMAND ----------
+
+v_result = dbutils.notebook.run("8. ingest_qualifying_data", 0, {"p_data_source": "Ergast API"})
+
+# COMMAND ----------
+
+v_result
+
+# COMMAND ----------
+
 

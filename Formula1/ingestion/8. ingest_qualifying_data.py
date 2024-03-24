@@ -1,4 +1,16 @@
 # Databricks notebook source
+# MAGIC %run "../includes/common_functions"
+
+# COMMAND ----------
+
+dbutils.widgets.text("p_data_source", "")
+
+# COMMAND ----------
+
+v_data_source = dbutils.widgets.get("p_data_source")
+
+# COMMAND ----------
+
 from pyspark.sql.types import IntegerType, StringType, StructType, StructField
 
 # COMMAND ----------
@@ -26,7 +38,7 @@ qualifying_df = (spark.read
 
 # COMMAND ----------
 
-from pyspark.sql.functions import current_timestamp
+from pyspark.sql.functions import current_timestamp, lit
 
 # COMMAND ----------
 
@@ -35,9 +47,13 @@ qualifying_df = (qualifying_df
                  .withColumnRenamed("raceId", "race_id")
                  .withColumnRenamed("driverId", "driver_id")
                  .withColumnRenamed("constructorId", "constructor_id")
-                 .withColumn("ingestion_date", current_timestamp())
+                 .withColumn("data_source", lit(v_data_source))
 )
 
+
+# COMMAND ----------
+
+qualifying_df = add_ingestion_date(qualifying_df)
 
 # COMMAND ----------
 
@@ -49,4 +65,4 @@ display(spark.read.parquet("/mnt/formula1dl/processed/qualifying"))
 
 # COMMAND ----------
 
-
+dbutils.notebook.exit("Success")
