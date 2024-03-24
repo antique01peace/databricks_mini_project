@@ -190,4 +190,8 @@ display(spark.read.parquet(f"{processed_folder_path}/circuits"))
 
 # COMMAND ----------
 
+dbutils.notebook.exit("Success")
+
+# COMMAND ----------
+
 
