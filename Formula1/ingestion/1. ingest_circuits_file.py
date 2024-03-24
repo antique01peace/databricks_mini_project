@@ -3,6 +3,10 @@
 
 # COMMAND ----------
 
+# MAGIC %run "../includes/common_functions"
+
+# COMMAND ----------
+
 # MAGIC %md
 # MAGIC ###Ingest circuits.csv file
 # MAGIC
@@ -148,7 +152,7 @@ from pyspark.sql.functions import current_timestamp
 
 # COMMAND ----------
 
-circuits_df = circuits_df.withColumn("ingestion_date", current_timestamp())
+circuits_df = add_ingestion_date(circuits_df)
 #              .withColumn("env",lit("Production")
 
 # COMMAND ----------
