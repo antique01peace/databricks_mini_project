@@ -1,4 +1,8 @@
 # Databricks notebook source
+# MAGIC %run "../includes/common_functions"
+
+# COMMAND ----------
+
 from pyspark.sql.types import IntegerType, StringType, StructType, StructField
 
 # COMMAND ----------
@@ -35,4 +39,5 @@ lap_times_df = (lap_times_df
 lap_times_df.write.mode('overwrite').parquet('/mnt/formula1dl/processed/lap_times')
 
 # COMMAND ----------
+
 

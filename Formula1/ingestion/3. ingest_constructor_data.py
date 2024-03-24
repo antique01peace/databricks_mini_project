@@ -8,6 +8,18 @@
 
 # COMMAND ----------
 
+# MAGIC %run "../includes/common_functions"
+
+# COMMAND ----------
+
+dbutils.widgets.text("p_data_source", "testing")
+
+# COMMAND ----------
+
+v_data_source = dbutils.widgets.get("p_data_source")
+
+# COMMAND ----------
+
 constructors_schema = "constructorId INT, constructorRef STRING, name STRING, nationality STRING, url STRING"
 
 # COMMAND ----------
@@ -31,7 +43,13 @@ display(constructors_df.limit(10))
 constructors_df = (constructors_df
                    .withColumnRenamed("constructorId", "constructor_id")
                    .withColumnRenamed("constructorRef", "constructor_ref")
-                   .withColumn("ingestion_date", current_timestamp()))
+                   .withColumn("data_source", lit(v_data_source))
+)
+
+# COMMAND ----------
+
+
+constructors_df = add_ingestion_date(constructors_df)
 
 # COMMAND ----------
 
@@ -43,3 +61,4 @@ constructors_df.write.mode("overwrite").parquet("/mnt/formula1dl/processed/const
 
 # COMMAND ----------
 
+dbutils.notebook.exit("Success")

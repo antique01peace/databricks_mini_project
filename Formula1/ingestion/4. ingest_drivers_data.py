@@ -3,6 +3,18 @@
 
 # COMMAND ----------
 
+# MAGIC %run "../includes/common_functions"
+
+# COMMAND ----------
+
+dbutils.widgets.text("p_data_source", "")
+
+# COMMAND ----------
+
+v_data_source = dbutils.widgets.get("p_data_source")
+
+# COMMAND ----------
+
 from pyspark.sql.types import IntegerType, StringType, DateType, StructType, StructField
 
 # COMMAND ----------
@@ -41,11 +53,15 @@ from pyspark.sql.functions import *
 drivers_df = (drivers_df.withColumnRenamed('driverId', 'driver_id')
               .withColumnRenamed('driverRef', 'driver_ref')
               .withColumn('name', concat(col('name.forename'), lit(' '), col('name.surname')))
-              .withColumn('ingestion_date', current_timestamp())
               .drop(col('url'))
+              .withColumn("data_source", lit(v_data_source))
               )
 
 display(drivers_df.limit(10))
+
+# COMMAND ----------
+
+drivers_df = add_ingestion_date(drivers_df)
 
 # COMMAND ----------
 
@@ -57,3 +73,4 @@ display(spark.read.parquet('/mnt/formula1dl/processed/drivers/').limit(5))
 
 # COMMAND ----------
 
+dbutils.notebook.exit("Success")

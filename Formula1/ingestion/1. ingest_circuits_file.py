@@ -7,7 +7,7 @@
 
 # COMMAND ----------
 
-dbutils.widgets.text("p_data_source", "testing")
+dbutils.widgets.text("p_data_source", "")
 
 # COMMAND ----------
 
@@ -191,7 +191,3 @@ display(spark.read.parquet(f"{processed_folder_path}/circuits"))
 # COMMAND ----------
 
 dbutils.notebook.exit("Success")
-
-# COMMAND ----------
-
-
