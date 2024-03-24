@@ -7,6 +7,14 @@
 
 # COMMAND ----------
 
+dbutils.widgets.text("p_data_source", "testing")
+
+# COMMAND ----------
+
+v_data_source = dbutils.widgets.get("p_data_source")
+
+# COMMAND ----------
+
 # MAGIC %md
 # MAGIC ###Ingest circuits.csv file
 # MAGIC
@@ -130,12 +138,17 @@ circuits_df = circuits_df.select(
 
 # COMMAND ----------
 
+from pyspark.sql.functions import lit
+
+# COMMAND ----------
+
 circuits_df = (
     circuits_df.withColumnRenamed("circuitId", "circuit_id")
     .withColumnRenamed("circuitTRef", "circuit_ref")
     .withColumnRenamed("lat", "latitude")
     .withColumnRenamed("lng", "longitude")
     .withColumnRenamed("alt", "altititude")
+    .withColumn("data_source", lit(v_data_source))
 )
 
 # COMMAND ----------
