@@ -53,7 +53,8 @@ race_results_df = (results_df
                            ,results_df.grid
                            ,results_df.fastest_lap
                            ,results_df.race_time
-                           ,results_df.points)
+                           ,results_df.points
+                           ,results_df.position)
                    .withColumn("ingestion_date", current_timestamp())
                    )
 
