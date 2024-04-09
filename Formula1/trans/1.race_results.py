@@ -68,7 +68,7 @@ display(race_results_df.filter((race_results_df["race_year"] == 2020) & (race_re
 
 # COMMAND ----------
 
-race_results_df.write.mode("overwrite").parquet(f"{presentation_folder_path}/race_results")
+race_results_df.write.mode("overwrite").format('parquet').saveAsTable("f1_presentation.race_results")
 
 # COMMAND ----------
 

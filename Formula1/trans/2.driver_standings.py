@@ -43,7 +43,7 @@ display(driver_standings_df.filter("race_year == 2011"))
 
 # COMMAND ----------
 
-driver_standings_df.write.mode("overwrite").parquet(f"{presentation_folder_path}/driver_standings")
+driver_standings_df.write.mode("overwrite").format('parquet').saveAsTable("f1_presentation.driver_standings")
 
 # COMMAND ----------
 
