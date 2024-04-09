@@ -65,7 +65,7 @@ display(races_df.limit(5))
 
 # COMMAND ----------
 
-races_df.write.mode("overwrite").partitionBy("race_year").parquet("/mnt/formula1dl/processed/races")
+races_df.write.mode("overwrite").partitionBy("race_year").format('parquet').saveAsTable("f1_processed.races")
 
 # COMMAND ----------
 

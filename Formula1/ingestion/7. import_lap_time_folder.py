@@ -48,7 +48,7 @@ lap_times_df = add_ingestion_date(lap_times_df)
 
 # COMMAND ----------
 
-lap_times_df.write.mode('overwrite').parquet('/mnt/formula1dl/processed/lap_times')
+lap_times_df.write.mode('overwrite').format('parquet').saveAsTable("f1_processed.lap_times")
 
 # COMMAND ----------
 

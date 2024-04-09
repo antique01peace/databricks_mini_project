@@ -67,7 +67,7 @@ results_df = add_ingestion_date(results_df)
 
 # COMMAND ----------
 
-results_df.write.mode('overwrite').parquet('/mnt/formula1dl/processed/results')
+results_df.write.mode('overwrite').format('parquet').saveAsTable("f1_processed.results")
 
 # COMMAND ----------
 

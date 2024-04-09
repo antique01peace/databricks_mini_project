@@ -57,7 +57,7 @@ qualifying_df = add_ingestion_date(qualifying_df)
 
 # COMMAND ----------
 
-qualifying_df.write.mode("overwrite").parquet("/mnt/formula1dl/processed/qualifying")
+qualifying_df.write.mode("overwrite").format('parquet').saveAsTable("f1_processed.qualifying")
 
 # COMMAND ----------
 

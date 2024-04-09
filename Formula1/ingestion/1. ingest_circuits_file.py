@@ -178,7 +178,7 @@ display(circuits_df.limit(5))
 
 # COMMAND ----------
 
-circuits_df.write.mode("overwrite").parquet(f"{processed_folder_path}/circuits")
+circuits_df.write.mode("overwrite").format('parquet').saveAsTable("f1_processed.circuits")
 
 # COMMAND ----------
 
@@ -187,6 +187,11 @@ circuits_df.write.mode("overwrite").parquet(f"{processed_folder_path}/circuits")
 # COMMAND ----------
 
 display(spark.read.parquet(f"{processed_folder_path}/circuits"))
+
+# COMMAND ----------
+
+# MAGIC %sql
+# MAGIC select * from f1_processed.circuits
 
 # COMMAND ----------
 

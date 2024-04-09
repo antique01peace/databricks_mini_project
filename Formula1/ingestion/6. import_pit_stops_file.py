@@ -62,7 +62,7 @@ pit_stop_df = add_ingestion_date(pit_stop_df)
 
 # COMMAND ----------
 
-pit_stop_df.write.mode('overwrite').parquet('/mnt/formula1dl/processed/pit_stops')
+pit_stop_df.write.mode('overwrite').format('parquet').saveAsTable("f1_processed.pit_stops")
 
 # COMMAND ----------
 

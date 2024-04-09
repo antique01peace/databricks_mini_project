@@ -65,7 +65,7 @@ drivers_df = add_ingestion_date(drivers_df)
 
 # COMMAND ----------
 
-drivers_df.write.mode('overwrite').parquet('/mnt/formula1dl/processed/drivers/')
+drivers_df.write.mode('overwrite').format('parquet').saveAsTable("f1_processed.drivers")
 
 # COMMAND ----------
 

@@ -57,7 +57,7 @@ display(constructors_df.limit(10))
 
 # COMMAND ----------
 
-constructors_df.write.mode("overwrite").parquet("/mnt/formula1dl/processed/constructors")
+constructors_df.write.mode("overwrite").format('parquet').saveAsTable("f1_processed.constructors")
 
 # COMMAND ----------
 
